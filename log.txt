@@ -1,0 +1,11 @@
+Date	Task						When		Hours
+——————————————————————————————————————————————————————————————————————————————
+3/24	Reading VCC tutorial				2:30 - 4:30	2.0 
+3/28    Putting assignments together in a single 	2:45 - 4:45	2.0
+        repository and reviewing what ones will work
+        best to verify.
+3/31	Reviewing SMACK to see if it’s a better		3:30 - 4:00	0.5
+       	solution.
+4/4	Installing SMACK and trying to get to know	2:00 - 
+	how to use it. The documentation is pretty
+	limited.
