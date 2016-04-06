@@ -6,6 +6,6 @@ Date	Task						When		Hours
         best to verify.
 3/31	Reviewing SMACK to see if it’s a better		3:30 - 4:00	0.5
        	solution.
-4/4	Installing SMACK and trying to get to know	2:00 - 
+4/4	Installing SMACK and trying to get to know	2:00 - 6:30	4.5
 	how to use it. The documentation is pretty
 	limited.
