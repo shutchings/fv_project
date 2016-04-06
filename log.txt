@@ -9,3 +9,7 @@ Date	Task						When		Hours
 4/4	Installing SMACK and trying to get to know	2:00 - 6:30	4.5
 	how to use it. The documentation is pretty
 	limited.
+4/6	Installing SMACK and getting a synced folder	2:00 - 3:00	1.0
+	working.
+4/6	Working on byte_sort, nibble_sort, and linked	4:30 - 5:30	1.0
+	list.

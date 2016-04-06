@@ -47,7 +47,7 @@
  *********************************************************************/
 
 #define BYTE_0_MASK	0x00000000000000FF
-#define BYTE_1_MASK     0x000000000000FF00
+#define BYTE_1_MASK 0x000000000000FF00
 #define BYTE_2_MASK	0x0000000000FF0000
 #define BYTE_3_MASK	0x00000000FF000000
 #define BYTE_4_MASK	0x000000FF00000000
