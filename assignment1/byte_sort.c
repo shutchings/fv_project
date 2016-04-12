@@ -1,10 +1,16 @@
 /*********************************************************************
  *
- * Operating Systems Assignment 1.A: Byte Sort
+ * byte_sort()
+ *
+ * specification: byte_sort() treats its argument as a sequence of
+ * 8 bytes, and returns a new unsigned long integer containing the
+ * same bytes, sorted numerically, with the smaller-valued bytes in
+ * the lower-order byte positions of the return value
+ * 
+ * EXAMPLE: byte_sort (0x0403deadbeef0201) returns 0xefdebead04030201
  *
  *********************************************************************/
 
-#include <smack.h>
 #include <unistd.h>
 #include <stdio.h>
 #include <stdint.h>
@@ -19,21 +25,12 @@
 #define BYTE_6_MASK	0x00FF000000000000
 #define BYTE_7_MASK	0xFF00000000000000
 
-typedef int bool;
-#define true 1
-#define false 0
-
 unsigned long byte_sort (unsigned long arg);
-bool is_sorted(unsigned long val);
+void assert(unsigned long testCase, unsigned long answer, int num);
 
 int main(int argc, char* argv[]) {
 
 	// Test byte_sort
-
-	unsigned long val = __VERIFIER_nondet_ulong();
-	assert(is_sorted(byte_sort(val)));
-	//printf("%lx\n", byte_sort(0xED));
-	/*
 	printf("Testing byte_sort()...\n");
 	assert(byte_sort(0x0706050403020100), 0x0706050403020100, 1);
 	assert(byte_sort(0x0403deadbeef0201), 0xefdebead04030201, 2);
@@ -43,20 +40,10 @@ int main(int argc, char* argv[]) {
 	assert(byte_sort(0x0100000000000000), 0x0100000000000000, 6);
 	assert(byte_sort(0x0000000000000001), 0x0100000000000000, 7);
 	assert(byte_sort(0x1), 0x0100000000000000, 8);
-	*/
+
 	return 0;
 }
 
-/// Here is my unmodified implementation of nibble_sort that I wrote for an
-/// operating systems assignment. It was tested with handwritten examples.  
-/// It treats its argument as a sequence of 8 bytes, and returns a new unsigned
-/// long integer containing the same bytes, sorted numerically, with the 
-/// smaller-valued bytes in the lower-order byte positions of the return value
-/// EXAMPLE: 0x0403deadbeef0201 returns 0xefdebead04030201.
-///
-/// @param[in] arg  Value to sort by bytes.
-///
-/// @return the value sorted by bytes.
 unsigned long byte_sort (unsigned long arg)
 {
 	unsigned long result = 0;
@@ -107,32 +94,12 @@ unsigned long byte_sort (unsigned long arg)
   	return result;
 }
 
-/// I added this function as a helper as part of my project. SMACK uses this
-/// function in its assert statements to verify that the value is in sorted
-/// order.
-///
-/// @param[in] val  An already byte sorted value.
-///
-/// @return true if the value is correctly byte sorted.
-bool is_sorted(unsigned long val)
-{
-	unsigned long mask = 0x00000000000000FF;
-	unsigned long temp = 0;
-	unsigned long next = 0;
-
-	int i;
-	for (i = 0; i < 7; i++)
-	{
-		next = (val & (mask << (i + 1) * 8)) >> ((i + 1) * 8);
-		temp = (val & (mask << i * 8)) >> (i * 8);
-
-		if (next < temp)
-		{
-			return false;
-		}
-	}
-
-	return true;
+void assert(unsigned long testCase, unsigned long answer, int num) {
+  if(testCase != answer) {
+    printf("Test case %d failed!\n", num);
+  }
+  else {
+    printf("Test case %d passed!\n", num);
+  }
 }
-
 

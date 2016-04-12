@@ -1,8 +1,3 @@
-# Written by Steve Hutchings
-# This make file compiles each C file into it's own executable.
-# The name of the executable is the same as the source file minus the .c extension
-# Note: each source file MUST have a entry point, otherwise this makefile will fail
-
 # the compiler to use
 CC=gcc
 

@@ -1,10 +1,16 @@
 /*********************************************************************
  *
- * Operating Systems Assignment 1.C: Sorted Linked List
+ * Sorted Linked List
+ *
+ * specification: allocate and return a pointer to a linked list of
+ * of integers
+ *
+ * - the list should always be sorted
+ *
+ * - each element must be dynamically allocated using a malloc() call
  *
  *********************************************************************/
 
-//#include <smack.h>
 #include <limits.h>
 #include <stdio.h>
 #include <stdint.h>
@@ -22,26 +28,19 @@ struct Node {
 
 struct Node* add_link(struct Node* head, int num);
 bool is_sorted(struct Node* head);
+void assert(bool testCase, int num);
 
 int main(int argc, char* argv[]) {
-	
-	// Verify empty list is sorted
 	struct Node* head = NULL;
-	is_sorted(head);
-	
-	//int val = __VERIFIER_nondet_int();
-	//head = add_link(head, val);
-	//assert(is_sorted(head));
 
-	/*
 	head = add_link(head, 10);
-	printf("Is sorted: %d\n", is_sorted(head));
+	assert(is_sorted(head), 0);
 	head = add_link(head, 7);
-	printf("Is sorted: %d\n", is_sorted(head));
+	assert(is_sorted(head), 1);
 	head = add_link(head, 8);
-	printf("Is sorted: %d\n", is_sorted(head));
+	assert(is_sorted(head), 2);
 	head = add_link(head, 11);
-	printf("Is sorted: %d\n", is_sorted(head));
+	assert(is_sorted(head), 3);
 
 	// Print list
 	struct Node* temp = head;
@@ -53,23 +52,10 @@ int main(int argc, char* argv[]) {
 	}
 
 	printf("\n");
-	*/
 
 	return 0;
 }
 
-/// Here is my slightly implementation of add_link that I wrote for an
-/// operating systems assignment. It used to be just a small list containing
-/// our name, but I thought I would extend it to just be sorted list of values.
-/// It was tested with handwritten examples. It allocates and returns a pointer
-/// to a linked list of integers with the new link inserted. The list should 
-/// always be sorted and each element must be dynamically allocated using a 
-/// malloc() call.
-/// 
-/// @param[in] head  The head of a linked list.
-/// @param[in] num   The value to add to the list.
-///
-/// @return a pointer to the head of the list.
 struct Node* add_link(struct Node* head, int num)
 {
 	// Nothing in the list yet
@@ -111,17 +97,9 @@ struct Node* add_link(struct Node* head, int num)
 	return head;
 }
 
-/// I added this function as a helper as part of my project. SMACK uses this
-/// function in its assert statements to verify that the list is indeed
-/// sorted.
-///
-/// @param[in] head  A pointer to an already sorted list.
-///
-/// @return true if the list is in sorted order.
 bool is_sorted(struct Node* head)
 {
-	int max = LONG_MIN;
-	printf("INT_MIN %d\n", max);
+	int max = INT_MIN;
 	struct Node* temp = head;
 
 	while (temp != NULL)
@@ -140,3 +118,13 @@ bool is_sorted(struct Node* head)
 
 	return true;
 }
+
+void assert(bool testCase, int num) {
+  if(!testCase) {
+    printf("Test case %d failed!\n", num);
+  }
+  else {
+    printf("Test case %d passed!\n", num);
+  }
+}
+

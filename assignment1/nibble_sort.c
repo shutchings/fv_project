@@ -1,7 +1,17 @@
 /*********************************************************************
  *
- * Operating Systems Assignment 1.B: Nibble Sort
+ * nibble_sort()
+ *
+ * Specification: nibble_sort() treats its argument as a sequence of 16 4-bit
+ * numbers, and returns a new unsigned long integer containing the same nibbles,
+ * sorted numerically, with smaller-valued nibbles towards the "small end" of
+ * the unsigned long value that you return
+ *
+ * The fact that nibbles and hex digits correspond should make it easy to
+ * verify that your code is working correctly
  * 
+ * EXAMPLE: nibble_sort (0x0403deadbeef0201) returns 0xfeeeddba43210000
+ *
  *********************************************************************/
 
 #include <smack.h>
@@ -27,31 +37,30 @@
 #define NIBBLE_14_MASK	0x0F00000000000000
 #define NIBBLE_15_MASK	0xF000000000000000
 
-typedef int bool;
-#define true 1
-#define false 0
-
 unsigned long nibble_sort (unsigned long arg);
-bool is_sorted(unsigned long val);
+void assert(unsigned long testCase, unsigned long answer, int num);
 
 int main(int argc, char* argv[]) {
 
+	// Test nibble_sort
+
+	/*
+	printf("Testing nibble_sort()...\n");
+	assert(nibble_sort(0xfedcba9876543210), 0xfedcba9876543210, 0);
+	assert(nibble_sort(0x0403deadbeef0201), 0xfeeeddba43210000, 1);
+	assert(nibble_sort(0x0000000000000000), 0x0000000000000000, 2);
+	assert(nibble_sort(0xffffffffffffffff), 0xffffffffffffffff, 3);
+	assert(nibble_sort(0x1000000000000000), 0x1000000000000000, 4);
+	assert(nibble_sort(0x0101010101010101), 0x1111111100000000, 5);
+	assert(nibble_sort(0x0000000000000010), 0x1000000000000000, 6);
+	assert(nibble_sort(0x1), 0x1000000000000000, 7);
+	*/
+
 	unsigned long val = __VERIFIER_nondet_ulong();
-	assert(is_sorted(nibble_sort(val)));
 
 	return 0;
 }
 
-/// Here is my unmodified implementation of nibble_sort that I wrote for an 
-/// operating systems assignment. It was tested with handwritten examples. It 
-/// treats its argument as a sequence of 16 4-bit numbers, and returns a new 
-/// unsigned long integer containing the same nibbles, sorted numerically, with
-/// smaller-valued nibbles towards the "small end" of the unsigned long value 
-/// that you return. EXAMPLE: 0x0403deadbeef0201 returns 0xfeeeddba43210000.
-///
-/// @param[in] arg  Value to sort by nibbles.
-///
-/// @return the value sorted by nibbles.
 unsigned long nibble_sort (unsigned long arg)
 {
   	unsigned long result = 0;
@@ -118,30 +127,12 @@ unsigned long nibble_sort (unsigned long arg)
   	return result;
 }
 
-/// I added this function as a helper as part of my project. SMACK uses this
-/// function in its assert statements to verify that the value is in sorted
-/// order.
-///
-/// @param[in] val  An already nibble sorted value.
-///
-/// @return true if the value is correctly nibble sorted.
-bool is_sorted(unsigned long val)
-{
-	unsigned long mask = 0x000000000000000F;
-	unsigned long temp = 0;
-	unsigned long next = 0;
-
-	int i;
-	for (i = 0; i < 15; i++)
-	{
-		next = (val & (mask << (i + 1) * 4)) >> ((i + 1) * 4);
-		temp = (val & (mask << i * 4)) >> (i * 4);
-
-		if (next < temp)
-		{
-			return false;
-		}
-	}
-
-	return true;
+void assert(unsigned long testCase, unsigned long answer, int num) {
+  if(testCase != answer) {
+    printf("Test case %d failed!\n", num);
+  }
+  else {
+    printf("Test case %d passed!\n", num);
+  }
 }
+
